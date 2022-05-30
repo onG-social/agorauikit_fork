@@ -47,6 +47,14 @@ export interface RtcContextInterface {
    * Is the UIKit in a channel
    */
   channelJoined: boolean
+  /**
+   * Function to start streaming
+   */
+  startStreaming: (status: boolean) => void
+  /**
+   * Has streaming started
+   */
+  streamingHasStarted: boolean
 }
 /**
  * Context to access local/remote tracks, client, dispatch and localuid. It's setup by {@link RtcConfigure}.

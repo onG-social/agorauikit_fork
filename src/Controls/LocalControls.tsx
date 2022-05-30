@@ -3,10 +3,12 @@ import EndCall from './Local/EndCall'
 import LocalAudioMute from './Local/LocalAudioMute'
 import LocalVideoMute from './Local/LocalVideoMute'
 import PropsContext from '../PropsContext'
+import StartStreaming from './Local/StartStreaming'
 
 function LocalControls() {
   const { styleProps, rtcProps } = useContext(PropsContext)
   const { localBtnContainer } = styleProps || {}
+  console.log('LocalControls -> rtcProps.role', rtcProps.role)
 
   return (
     <div
@@ -24,6 +26,7 @@ function LocalControls() {
         ...localBtnContainer
       }}
     >
+      {!rtcProps.privateCall && rtcProps.role !== 'audience' && <StartStreaming />}
       {rtcProps.role !== 'audience' && <LocalVideoMute />}
       {rtcProps.role !== 'audience' && <LocalAudioMute />}
       <EndCall />

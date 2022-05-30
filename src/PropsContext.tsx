@@ -305,6 +305,10 @@ export interface RtcPropsInterface {
    * Disable Agora RTM, this also disables the use of usernames and remote mute functionality
    */
   disableRtm?: boolean
+  /**
+   * privateCall when set to true will display the popup else won't
+   */
+  privateCall?: boolean
 }
 
 /**
@@ -494,13 +498,18 @@ export interface IconsInterface {
    * Icon to close the overlay in floating layout
    */
   close: string
+  /**
+   * Icon to leave the livestream
+   */
+  leave: string
 }
 
 const initialValue: PropsInterface = {
   rtcProps: {
     appId: '',
     channel: '',
-    role: 'host'
+    role: 'host',
+    privateCall: false,
   },
   rtmProps: {}
 }

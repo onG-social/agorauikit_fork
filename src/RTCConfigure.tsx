@@ -29,6 +29,8 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
   const { callbacks, rtcProps } = useContext(PropsContext)
   const [ready, setReady] = useState<boolean>(false)
   const [channelJoined, setChannelJoined] = useState<boolean>(false)
+  const [streamingHasStarted, setStartStreaming] = useState<boolean>(props.privateCall || true)
+
   let joinRes: ((arg0: boolean) => void) | null = null // Resolve for canJoin -> to set canJoin to true
   const canJoin = useRef(
     new Promise<boolean | void>((resolve, reject) => {
@@ -271,14 +273,15 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
       }
     }
     console.log('Publish', localVideoTrack, localAudioTrack, callActive)
-    if (callActive) {
+    if (callActive && channelJoined && streamingHasStarted) {
       publish()
     }
   }, [
     callActive,
     localVideoTrack?.enabled,
     localAudioTrack?.enabled,
-    channelJoined
+    channelJoined,
+    streamingHasStarted
   ])
 
   // update local state if tracks are not null
@@ -360,6 +363,10 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
     }
   }, [rtcProps.activeSpeaker, rtcProps.layout])
 
+  const startStreaming = (status: boolean) => {
+    setStartStreaming(status);
+  }
+
   return (
     <RtcProvider
       value={{
@@ -369,7 +376,9 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
         localAudioTrack,
         dispatch,
         localUid: uid,
-        channelJoined
+        channelJoined,
+        startStreaming,
+        streamingHasStarted
       }}
     >
       <MaxUidProvider value={uidState.max}>
