@@ -272,7 +272,7 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
         }
       }
     }
-    console.log('Publish', localVideoTrack, localAudioTrack, callActive)
+    console.log('Publish', localVideoTrack, localAudioTrack, callActive, channelJoined, streamingHasStarted)
     if (callActive && channelJoined && streamingHasStarted) {
       publish()
     }
