@@ -1,5 +1,5 @@
 
-import React, { CSSProperties, useContext } from 'react'
+import React, { CSSProperties, Fragment, useContext } from 'react'
 import RtcContext from '../../RtcContext'
 
 function StartStreaming() {
@@ -10,7 +10,7 @@ function StartStreaming() {
   }
 
   if (streamingHasStarted === true) {
-    return <></>
+    return <Fragment></Fragment>
   }
 
   return (
