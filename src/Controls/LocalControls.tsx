@@ -9,6 +9,8 @@ function LocalControls() {
   const { styleProps, rtcProps } = useContext(PropsContext)
   const { localBtnContainer } = styleProps || {}
   console.log('LocalControls -> rtcProps.role', rtcProps.role)
+  console.log('LocalControls -> rtcProps.privateCall', rtcProps.privateCall)
+
 
   return (
     <div
@@ -26,7 +28,7 @@ function LocalControls() {
         ...localBtnContainer
       }}
     >
-      {!rtcProps.privateCall && rtcProps.role !== 'audience' && <StartStreaming />}
+      {rtcProps.privateCall === false && rtcProps.role !== 'audience' && <StartStreaming />}
       {rtcProps.role !== 'audience' && <LocalVideoMute />}
       {rtcProps.role !== 'audience' && <LocalAudioMute />}
       <EndCall />
