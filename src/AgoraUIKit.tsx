@@ -56,7 +56,7 @@ export const VideocallUI = () => {
           </React.Fragment>
         ) : (
           <RtmConfigure>
-            {rtcProps.privateCall && <PopUp />}
+            {rtcProps.privateCall === true && <PopUp />}
             {rtcProps?.layout === layout.grid ? <GridVideo /> : <PinnedVideo />}
             <LocalControls />
           </RtmConfigure>

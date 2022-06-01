@@ -29,7 +29,7 @@ const RtcConfigure: React.FC<Partial<RtcPropsInterface>> = (props) => {
   const { callbacks, rtcProps } = useContext(PropsContext)
   const [ready, setReady] = useState<boolean>(false)
   const [channelJoined, setChannelJoined] = useState<boolean>(false)
-  const [streamingHasStarted, setStartStreaming] = useState<boolean>(props.privateCall || true)
+  const [streamingHasStarted, setStartStreaming] = useState<boolean>(!!props.privateCall)
 
   let joinRes: ((arg0: boolean) => void) | null = null // Resolve for canJoin -> to set canJoin to true
   const canJoin = useRef(
